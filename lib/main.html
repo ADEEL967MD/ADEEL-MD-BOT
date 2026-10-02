@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="night" data-skin="forest">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ADEEL-MD | Link Device</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;700&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #070a08;
+      --panel: #0e1410;
+      --line: #1c2a20;
+      --text: #e8f0ea;
+      --muted: #8a9a8e;
+      --c1: #1db954;
+      --c2: #0d7a3a;
+      --c3: #b71c1c;
+      --c4: #2e7d32;
+      --danger: #e57373;
+      --radius: 18px;
+    }
+
+    /* DAY */
+    html[data-theme="day"] {
+      --bg: #f3f6f4;
+      --panel: #ffffff;
+      --line: #d5e0d8;
+      --text: #102016;
+      --muted: #5c6b60;
+      --danger: #c62828;
+    }
+
+    /* SKINS */
+    html[data-skin="forest"] { --c1:#1db954; --c2:#0d7a3a; --c3:#b71c1c; --c4:#2e7d32; }
+    html[data-skin="ember"]  { --c1:#ff5252; --c2:#c62828; --c3:#1db954; --c4:#ff8a65; }
+    html[data-skin="ocean"]  { --c1:#00bcd4; --c2:#1565c0; --c3:#1db954; --c4:#26c6da; }
+    html[data-skin="violet"] { --c1:#ab47bc; --c2:#6a1b9a; --c3:#1db954; --c4:#ce93d8; }
+    html[data-skin="mono"]   { --c1:#9e9e9e; --c2:#424242; --c3:#1db954; --c4:#bdbdbd; }
+    html[data-skin="gold"]   { --c1:#f9a825; --c2:#ef6c00; --c3:#1b5e20; --c4:#ffd54f; }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      min-height: 100vh;
+      font-family: 'Poppins', sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 12% 8%, color-mix(in srgb, var(--c3) 22%, transparent), transparent 32%),
+        radial-gradient(circle at 90% 85%, color-mix(in srgb, var(--c1) 18%, transparent), transparent 36%),
+        var(--bg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 18px;
+      transition: background 0.25s ease, color 0.25s ease;
+    }
+
+    .wrap {
+      width: min(460px, 100%);
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      padding: 22px 18px 20px;
+      box-shadow: 0 18px 50px rgba(0,0,0,0.28);
+    }
+
+    .top-bar {
+      display: flex;
+      justify-content: space-between;
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+    .chip {
+      border: 1px solid var(--line);
+      background: transparent;
+      color: var(--text);
+      border-radius: 999px;
+      padding: 7px 12px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: inherit;
+    }
+    .chip:hover { border-color: var(--c1); color: var(--c1); }
+
+    .logo {
+      width: 112px;
+      height: 112px;
+      margin: 4px auto 14px;
+      border-radius: 50%;
+      padding: 3px;
+      background: linear-gradient(135deg, var(--c1), var(--c2), var(--c3), var(--c4));
+      background-size: 220% 220%;
+      animation: move 7s linear infinite;
+    }
+    @keyframes move { to { background-position: 220% center; } }
+    .logo img {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid var(--panel);
+      display: block;
+      background: #111;
+    }
+
+    h1 {
+      font-family: 'Orbitron', sans-serif;
+      text-align: center;
+      font-size: 1.45rem;
+      letter-spacing: 1.4px;
+      color: var(--c1);
+    }
+    .sub {
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.86rem;
+      margin: 6px 0 16px;
+    }
+
+    .steps {
+      background: color-mix(in srgb, var(--c1) 8%, transparent);
+      border: 1px solid color-mix(in srgb, var(--c1) 28%, var(--line));
+      border-radius: 14px;
+      padding: 12px 14px;
+      margin-bottom: 16px;
+    }
+    .steps h2 {
+      font-size: 0.84rem;
+      margin-bottom: 8px;
+      color: var(--c1);
+    }
+    .steps ol {
+      margin-left: 18px;
+      color: var(--muted);
+      font-size: 0.8rem;
+      line-height: 1.55;
+    }
+    .steps li { margin-bottom: 4px; }
+
+    label {
+      display: block;
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+    input {
+      width: 100%;
+      background: color-mix(in srgb, var(--bg) 70%, var(--panel));
+      border: 1px solid var(--line);
+      color: var(--text);
+      border-radius: 12px;
+      padding: 12px 14px;
+      font-size: 1rem;
+      outline: none;
+      margin-bottom: 8px;
+    }
+    input:focus {
+      border-color: var(--c1);
+      box-shadow: 0 0 0 3px color-mix(in srgb, var(--c1) 18%, transparent);
+    }
+    .hint {
+      font-size: 0.74rem;
+      color: var(--muted);
+      margin-bottom: 14px;
+      line-height: 1.45;
+    }
+
+    .btn {
+      width: 100%;
+      border: 0;
+      border-radius: 12px;
+      padding: 12px 14px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: inherit;
+      margin-bottom: 10px;
+    }
+    .btn-main {
+      background: linear-gradient(90deg, var(--c2), var(--c1));
+      color: #041008;
+    }
+    .btn-main:disabled { opacity: 0.55; cursor: not-allowed; }
+    .btn-wa {
+      background: transparent;
+      border: 1px solid var(--line);
+      color: var(--text);
+    }
+    .btn-wa:hover {
+      border-color: var(--c1);
+      color: var(--c1);
+    }
+
+    .err {
+      display: none;
+      margin-bottom: 10px;
+      color: var(--danger);
+      background: color-mix(in srgb, var(--danger) 12%, transparent);
+      border: 1px solid color-mix(in srgb, var(--danger) 30%, transparent);
+      border-radius: 10px;
+      padding: 10px;
+      font-size: 0.84rem;
+      text-align: center;
+    }
+    .err.show { display: block; }
+
+    .result {
+      display: none;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 14px;
+      text-align: center;
+      margin-bottom: 10px;
+      background: color-mix(in srgb, var(--bg) 55%, var(--panel));
+    }
+    .result.show { display: block; }
+    .result .lbl {
+      font-size: 0.75rem;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+    .code {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.7rem;
+      letter-spacing: 3px;
+      color: var(--c1);
+      user-select: all;
+      word-break: break-all;
+    }
+    .copy {
+      margin-top: 10px;
+      width: 100%;
+      border: 1px solid var(--line);
+      background: transparent;
+      color: var(--text);
+      border-radius: 10px;
+      padding: 9px;
+      cursor: pointer;
+      font-family: inherit;
+      font-weight: 600;
+    }
+
+    .palette {
+      display: none;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      margin: 8px 0 12px;
+    }
+    .palette.show { display: grid; }
+    .swatch {
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 10px 6px;
+      font-size: 0.72rem;
+      font-weight: 600;
+      cursor: pointer;
+      color: var(--text);
+      background: transparent;
+      font-family: inherit;
+    }
+    .swatch.active {
+      border-color: var(--c1);
+      box-shadow: 0 0 0 2px color-mix(in srgb, var(--c1) 25%, transparent);
+    }
+
+    footer {
+      margin-top: 8px;
+      text-align: center;
+      font-size: 0.72rem;
+      color: var(--muted);
+    }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <div class="top-bar">
+      <button class="chip" id="themeBtn" type="button">Night Mode</button>
+      <button class="chip" id="colorBtn" type="button">Choose Color</button>
+    </div>
+
+    <div class="palette" id="palette">
+      <button class="swatch active" data-skin="forest" type="button">Forest</button>
+      <button class="swatch" data-skin="ember" type="button">Ember</button>
+      <button class="swatch" data-skin="ocean" type="button">Ocean</button>
+      <button class="swatch" data-skin="violet" type="button">Violet</button>
+      <button class="swatch" data-skin="gold" type="button">Gold</button>
+      <button class="swatch" data-skin="mono" type="button">Mono</button>
+    </div>
+
+    <div class="logo">
+      <img
+        src="https://raw.githubusercontent.com/ADEEL967MD/Channel-react/main/adeel-api.jpg"
+        alt="ADEEL-MD"
+        onerror="this.src='https://cdn.jsdelivr.net/gh/ADEEL967MD/Channel-react@main/adeel-api.jpg'"
+      />
+    </div>
+
+    <h1>ADEEL-MD</h1>
+    <p class="sub">Link your WhatsApp device with pair code</p>
+
+    <section class="steps">
+      <h2>How to link device</h2>
+      <ol>
+        <li>Neeche apna WhatsApp number likho (country code ke sath).</li>
+        <li><b>Get Pair Code</b> button dabao.</li>
+        <li>WhatsApp open karo → Linked Devices → Link a Device.</li>
+        <li>Phone number se link choose karo, phir yahan wala code enter karo.</li>
+        <li>Code 1 minute me expire ho sakta hai, turant use karo.</li>
+      </ol>
+    </section>
+
+    <label for="number">WhatsApp Number</label>
+    <input id="number" type="tel" inputmode="numeric" placeholder="Country code + number" autocomplete="tel" />
+    <p class="hint">
+      Sirf digits. Plus (+) ya leading 0 mat likho.<br />
+      Format example: 92xxxxxxxxxx
+    </p>
+
+    <div class="err" id="errBox"></div>
+
+    <button class="btn btn-main" id="pairBtn" type="button">Get Pair Code</button>
+    <button class="btn btn-wa" id="waBtn" type="button">Open Owner WhatsApp</button>
+
+    <div class="result" id="resultBox">
+      <div class="lbl">Your Pair Code</div>
+      <div class="code" id="codeText">------</div>
+      <button class="copy" id="copyBtn" type="button">Copy Code</button>
+    </div>
+
+    <footer>Powered by ADEEL-MD</footer>
+  </main>
+
+  <script>
+    const html = document.documentElement;
+    const themeBtn = document.getElementById('themeBtn');
+    const colorBtn = document.getElementById('colorBtn');
+    const palette = document.getElementById('palette');
+    const numberInput = document.getElementById('number');
+    const pairBtn = document.getElementById('pairBtn');
+    const waBtn = document.getElementById('waBtn');
+    const errBox = document.getElementById('errBox');
+    const resultBox = document.getElementById('resultBox');
+    const codeText = document.getElementById('codeText');
+    const copyBtn = document.getElementById('copyBtn');
+
+    // Owner WhatsApp open only via button (not shown as pair example)
+    const OWNER_WA = '923035512967';
+
+    function showError(msg) {
+      errBox.textContent = msg || 'Something went wrong';
+      errBox.classList.add('show');
+      resultBox.classList.remove('show');
+    }
+    function clearError() {
+      errBox.classList.remove('show');
+      errBox.textContent = '';
+    }
+
+    function normalizeNumber(raw) {
+      let n = String(raw || '').replace(/[^0-9]/g, '');
+      if (n.startsWith('0') && n.length >= 10) n = '92' + n.slice(1);
+      return n;
+    }
+
+    async function getPairCode() {
+      clearError();
+      const number = normalizeNumber(numberInput.value);
+      if (!number || number.length < 10 || number.length > 15) {
+        showError('Valid number with country code is required');
+        return;
+      }
+
+      pairBtn.disabled = true;
+      pairBtn.textContent = 'Please wait...';
+
+      try {
+        const res = await fetch('/api/code?number=' + encodeURIComponent(number));
+        const data = await res.json();
+        if (data.error || data.status === false) {
+          showError(data.error || data.message || 'Failed to get pair code');
+          return;
+        }
+        const code = data.code || data.pairingCode || data.pair || data.result;
+        if (!code) {
+          showError('Pair code not received. Try again.');
+          return;
+        }
+        codeText.textContent = String(code).toUpperCase();
+        resultBox.classList.add('show');
+      } catch (e) {
+        showError('Server not responding. Deploy / bot start check karo.');
+      } finally {
+        pairBtn.disabled = false;
+        pairBtn.textContent = 'Get Pair Code';
+      }
+    }
+
+    themeBtn.addEventListener('click', () => {
+      const next = html.getAttribute('data-theme') === 'night' ? 'day' : 'night';
+      html.setAttribute('data-theme', next);
+      themeBtn.textContent = next === 'night' ? 'Night Mode' : 'Day Mode';
+    });
+
+    colorBtn.addEventListener('click', () => {
+      palette.classList.toggle('show');
+    });
+
+    palette.querySelectorAll('.swatch').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        palette.querySelectorAll('.swatch').forEach((b) => b.classList.remove('active'));
+        btn.classList.add('active');
+        html.setAttribute('data-skin', btn.dataset.skin);
+      });
+    });
+
+    pairBtn.addEventListener('click', getPairCode);
+    numberInput.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') getPairCode();
+    });
+
+    waBtn.addEventListener('click', () => {
+      window.open('https://wa.me/' + OWNER_WA, '_blank', 'noopener');
+    });
+
+    copyBtn.addEventListener('click', async () => {
+      const code = codeText.textContent.trim();
+      if (!code || code === '------') return;
+      try {
+        await navigator.clipboard.writeText(code);
+        copyBtn.textContent = 'Copied';
+        setTimeout(() => { copyBtn.textContent = 'Copy Code'; }, 1200);
+      } catch {
+        copyBtn.textContent = 'Copy failed';
+        setTimeout(() => { copyBtn.textContent = 'Copy Code'; }, 1200);
+      }
+    });
+  </script>
+</body>
+</html>

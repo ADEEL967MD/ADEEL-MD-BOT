@@ -1,0 +1,27 @@
+{
+  "name": "ADEEL-MD",
+  "description": "Javascript WhatsApp bot made by ADEEL-MD",
+  "logo": "https://files.catbox.moe/kvjcgy.jpg",
+  "keywords": ["ADEEL-MD"],
+  "success_url": "/",
+  "stack": "container",
+
+  "env": {
+    "MONGODB_URL": {
+      "description": "MongoDB connection string for database storage",
+      "required": false
+    },
+    "DB_NAME": {
+      "description": "Database name for MongoDB (default: adeel-md)",
+      "required": false,
+      "value": "adeel-md"
+    }
+  },
+
+  "buildpacks": [
+    {
+      "url": "https://github.com/heroku/heroku-buildpack-nodejs.git"
+    }
+  ],
+  "stack": "heroku-24"
+}
